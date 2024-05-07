@@ -1,23 +1,13 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 
-const Link = require('./models/link.model');
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-const username = encodeURIComponent(process.env.USERNAME);
-const password = encodeURIComponent(process.env.PASSWORD);
-const cluster = process.env.CLUSTER;
-const appName = process.env.APP_NAME;
-const customCollection = process.env.COLLECTION;
-
 let path = '/api'
-let uri =
-    `mongodb+srv://${username}:${password}@${cluster}/${customCollection}?retryWrites=true&w=majority&appName=${appName}`;
 
 app.get('/', function (req, res) {
     res.send('Map technologies');
@@ -27,8 +17,8 @@ app.get('/', function (req, res) {
 
 app.post(`${path}/scan`, async (req, res) => {
     try {
-        const url = await Link.create(req.body);
-        console.log("url: ", url);
+
+        console.log("url: ", req.body);
         let resp = [
             {
                 name: "React",
@@ -57,12 +47,6 @@ app.post(`${path}/scan`, async (req, res) => {
 });
 
 // -------------------------------------------------------
-
-mongoose.connect(uri).then(() => {
-    console.log('connected to database!')
-    app.listen(3000, () => {
-        console.log('Server is running on port 3000')
-    })
-}).catch((e) => {
-    console.log('Connection failed!', e)
+app.listen(3000, () => {
+    console.log('Server is running on port 3000')
 })
