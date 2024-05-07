@@ -3,6 +3,8 @@ runtime: nodejs18
 env_variables:
   PORT: 8080  # Specify the port on which your application will listen
 
+entrypoint: node index.js
+
 handlers:
   - url: /api/scan
     script: auto
