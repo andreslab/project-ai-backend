@@ -1,10 +1,11 @@
 runtime: nodejs18
 
+env_variables:
+  PORT: 8080  # Specify the port on which your application will listen
+
 handlers:
   - url: /api/scan
     script: auto
 
-  - url: /.*
-    secure: always
-    redirect_http_response_code: 301
+  - url: .*
     script: auto
