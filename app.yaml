@@ -1,7 +1,7 @@
 runtime: nodejs18
 
 env_variables:
-  PORT: 8080  # Specify the port on which your application will listen
+  PORT: 8080
 
 entrypoint: node index.js
 
